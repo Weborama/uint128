@@ -1,6 +1,6 @@
 # github.com/weborama/uint128
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/weborama/uint128)](https://goreportcard.com/report/github.com/weborama/uint128)[![GolangCI Report Card](https://github.com/golangci/golangci-web/blob/master/src/assets/images/badge_a_plus_flat.svg)](https://golangci.com/r/github.com/weborama/uint128)
+[![Go Report Card](https://goreportcard.com/badge/github.com/weborama/uint128)](https://goreportcard.com/report/github.com/weborama/uint128)
 
 This package provides an implementation of a 128 bit unsigned integer with some
 implementations of:
