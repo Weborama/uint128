@@ -1,7 +1,6 @@
 // Copyright 2018 Weborama. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
 package uint128_test
 
 import (
@@ -12,7 +11,10 @@ import (
 )
 
 func TestUint128Operations(t *testing.T) {
+	t.Parallel()
+
 	testCases := []struct {
+		label                 string
 		input                 uint128.Uint128
 		expectedLen           int
 		expectedLeadingZeros  int
@@ -24,28 +26,36 @@ func TestUint128Operations(t *testing.T) {
 		expectedDecr          uint128.Uint128
 	}{
 		{
-			uint128.Uint128{H: 0x0, L: 0x456}, 11, 117, 5, 1,
+			"{H: 0x0, L: 0x456}",
+			uint128.Uint128{H: 0x0, L: 0x456},
+			11, 117, 5, 1,
 			uint128.Uint128{H: 0x6a20000000000000, L: 0x0},
 			uint128.Uint128{H: 0x5604000000000000, L: 0x0},
-			uint128.Uint128{H: 0x0, L: 0x456}, uint128.Uint128{H: 0x0, L: 0x456},
+			uint128.Uint128{H: 0x0, L: 0x456},
+			uint128.Uint128{H: 0x0, L: 0x456},
 		},
 		{
-			uint128.Uint128{H: 0x1, L: 0x456}, 65, 63, 6, 1,
+			"{H: 0x1, L: 0x456}",
+			uint128.Uint128{H: 0x1, L: 0x456},
+			65, 63, 6, 1,
 			uint128.Uint128{H: 0x6a20000000000000, L: 0x8000000000000000},
 			uint128.Uint128{H: 0x5604000000000000, L: 0x100000000000000},
-			uint128.Uint128{H: 0x1, L: 0x456}, uint128.Uint128{H: 0x1, L: 0x456},
+			uint128.Uint128{H: 0x1, L: 0x456},
+			uint128.Uint128{H: 0x1, L: 0x456},
 		},
 	}
 
 	// NOTE: binary representation: fmt.Sprintf("%0b%064b", input.H, input.L)
 
 	for _, testCase := range testCases {
-		var rval int
-
-		var ruint uint128.Uint128
-
 		testCase := testCase
-		t.Run(testCase.input.String(), func(t *testing.T) {
+		t.Run(testCase.label, func(t *testing.T) {
+			t.Parallel()
+
+			var rval int
+
+			var ruint uint128.Uint128
+
 			rval = uint128.Len(testCase.input)
 			if rval != testCase.expectedLen {
 				t.Fatalf("Len - Expected:%d Got:%d", testCase.expectedLen, rval)
@@ -75,7 +85,9 @@ func TestUint128Operations(t *testing.T) {
 }
 
 func TestAdd128(t *testing.T) {
-	testcases := []struct {
+	t.Parallel()
+
+	testCases := []struct {
 		label         string
 		x, y, carry   uint128.Uint128
 		sum, carryOut uint128.Uint128
@@ -107,19 +119,23 @@ func TestAdd128(t *testing.T) {
 		},
 	}
 
-	for _, tc := range testcases {
-		tc := tc
-		t.Run(tc.label, func(t *testing.T) {
-			sum, carryOut := tc.x.Add128(tc.y, tc.carry)
+	for _, testCase := range testCases {
+		testCase := testCase
+		t.Run(testCase.label, func(t *testing.T) {
+			t.Parallel()
 
-			assert(t, sum, tc.sum, "unexpected sum")
-			assert(t, carryOut, tc.carryOut, "unexpected carryOut")
+			sum, carryOut := testCase.x.Add128(testCase.y, testCase.carry)
+
+			assert(t, sum, testCase.sum, "unexpected sum")
+			assert(t, carryOut, testCase.carryOut, "unexpected carryOut")
 		})
 	}
 }
 
 func TestAdd(t *testing.T) {
-	testcases := []struct {
+	t.Parallel()
+
+	testCases := []struct {
 		label string
 		x, y  uint128.Uint128
 		sum   uint128.Uint128
@@ -150,18 +166,22 @@ func TestAdd(t *testing.T) {
 		},
 	}
 
-	for _, tc := range testcases {
-		tc := tc
-		t.Run(tc.label, func(t *testing.T) {
-			sum := tc.x.Add(tc.y)
+	for _, testCase := range testCases {
+		testCase := testCase
+		t.Run(testCase.label, func(t *testing.T) {
+			t.Parallel()
 
-			assert(t, sum, tc.sum, "unexpected sum")
+			sum := testCase.x.Add(testCase.y)
+
+			assert(t, sum, testCase.sum, "unexpected sum")
 		})
 	}
 }
 
 func TestIncr(t *testing.T) {
-	testcases := []struct {
+	t.Parallel()
+
+	testCases := []struct {
 		label string
 		x     uint128.Uint128
 		incr  uint128.Uint128
@@ -183,17 +203,21 @@ func TestIncr(t *testing.T) {
 		},
 	}
 
-	for _, tc := range testcases {
-		tc := tc
-		t.Run(tc.label, func(t *testing.T) {
-			incr := tc.x.Incr()
+	for _, testCase := range testCases {
+		testCase := testCase
+		t.Run(testCase.label, func(t *testing.T) {
+			t.Parallel()
 
-			assert(t, incr, tc.incr, "unexpected incr")
+			incr := testCase.x.Incr()
+
+			assert(t, incr, testCase.incr, "unexpected incr")
 		})
 	}
 }
 
 func assert(t *testing.T, got, expected uint128.Uint128, message string) {
+	t.Helper()
+
 	if got != expected {
 		t.Errorf("error: %s (got: %v, expected: %v)", message, got, expected)
 	}
