@@ -24,7 +24,7 @@ type Uint128 struct {
 
 // Zero is a 0 valued Uint128.
 func Zero() Uint128 {
-	return Uint128{}
+	return Uint128{H: 0, L: 0}
 }
 
 // MaxUint128 returns the maximum value of an Uint128.
@@ -33,9 +33,10 @@ func MaxUint128() Uint128 {
 }
 
 // Cmp compares two Uint128 and returns one of the following values:
-//   -1 if x <  y
-//    0 if x == y
-//   +1 if x >  y
+//
+//	-1 if x <  y
+//	 0 if x == y
+//	+1 if x >  y
 func (x Uint128) Cmp(y Uint128) int {
 	return Cmp(x, y)
 }
@@ -115,7 +116,7 @@ func NewFromString(str string) (x Uint128, err error) {
 	x = Uint128{0, 0}
 	// nolint: gomnd // Number of characters in a hexadecimal representation of an uint128
 	if len(str) > 32 {
-		return x, fmt.Errorf("s:%s length greater than 32", str)
+		return x, fmt.Errorf("s:%s length greater than 32", str) // nolint: goerr113
 	}
 
 	b, err := hex.DecodeString(fmt.Sprintf("%032s", str))

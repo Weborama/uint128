@@ -6,9 +6,11 @@ package uint128 // import "github.com/weborama/uint128"
 import "math/bits"
 
 // Cmp compares two Uint128 and returns one of the following values:
-//   -1 if x <  y
-//    0 if x == y
-//   +1 if x >  y
+//
+//	-1 if x <  y
+//	 0 if x == y
+//	+1 if x >  y
+//
 // nolint: varnamelen
 func Cmp(x, y Uint128) int {
 	if x.H < y.H {
@@ -128,7 +130,7 @@ func Add128(x, y, carry Uint128) (sum, carryOut Uint128) {
 
 // Incr increments x by one.
 func Incr(x Uint128) Uint128 {
-	return Add(x, Uint128{L: 1})
+	return Add(x, Uint128{H: 0, L: 1})
 }
 
 // Sub subtracts x and y.
