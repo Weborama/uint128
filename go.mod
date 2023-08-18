@@ -1,3 +1,3 @@
 module github.com/weborama/uint128
 
-go 1.19
+go 1.21

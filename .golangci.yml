@@ -19,6 +19,7 @@ issues:
         - lll
         - gomnd
         - maintidx
+        - exhaustruct
     - path: _test.go
       text: "fieldalignment: struct ((with .+ pointer bytes)|(of size .+)) could be .+"
 linters:
@@ -31,7 +32,6 @@ linters:
     - contextcheck
     - cyclop
     - decorder
-    - depguard
     - dogsled
     - dupl
     - dupword
