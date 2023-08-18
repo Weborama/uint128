@@ -1,6 +1,10 @@
 # github.com/weborama/uint128
 
+[![Godoc for weborama/cidr](https://pkg.go.dev/badge/github.com/weborama/uint128)](https://pkg.go.dev/github.com/weborama/uint128)
 [![Go Report Card](https://goreportcard.com/badge/github.com/weborama/uint128)](https://goreportcard.com/report/github.com/weborama/uint128)
+[![Go](https://github.com/Weborama/uint128/actions/workflows/go.yml/badge.svg)](https://github.com/Weborama/uint128/actions/workflows/go.yml)
+[![golangci-lint](https://github.com/Weborama/uint128/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/Weborama/uint128/actions/workflows/golangci-lint.yml)
+
 
 This package provides an implementation of a 128 bit unsigned integer with some
 implementations of:
